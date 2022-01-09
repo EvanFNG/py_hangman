@@ -13,7 +13,33 @@ clear = lambda: os.system('cls')
 
 def main():
    
-    word_choice = random.choice(words)
+    difficulty_options = {'Easy': 4, 'Medium': 8, 'Hard': 9}
+
+    valid_choice = False
+    while not valid_choice:
+        clear()
+        diff_choice = input('Choose easy, medium or hard difficulty.').title()
+        if diff_choice in difficulty_options.keys():
+            valid_choice = True
+
+    if diff_choice == 'Easy':
+        while True:
+            word_choice = random.choice(words)
+            if len(word_choice) <= difficulty_options['Easy']:
+                break
+
+    elif diff_choice == 'Medium':
+        while True:
+            word_choice = random.choice(words)
+            if len(word_choice) > difficulty_options['Easy'] and len(word_choice) <= difficulty_options['Medium']:
+                break
+
+    else:
+        while True:
+            word_choice = random.choice(words)
+            if len(word_choice) >= 8:
+                break
+
     wrong_guesses = 0
     won = False
 
@@ -53,6 +79,7 @@ def main():
         else:
             clear()
             print('Correct!\n')
+            print(letters_guessed)
             letters_guessed.append(guess)
             indexes = []
             for index, letter in enumerate(word_choice):
