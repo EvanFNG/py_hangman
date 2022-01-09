@@ -61,6 +61,7 @@ def main():
         clear()
         print("You've been hanged. F")
     else:
+        clear()
         print(f"You won! the word was: {word_choice.title()}")
 
 main()
