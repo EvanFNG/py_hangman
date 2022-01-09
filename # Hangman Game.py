@@ -1,6 +1,7 @@
 # Hangman Game
 import random
 import os
+from string import ascii_lowercase
 
 # Clear console function
 clear = lambda: os.system('cls')
@@ -18,20 +19,25 @@ def main():
     won = False
 
     letters_guessed = []
-    guess_arr = ['_' for i in word_choice]
+    guess_dict = {i: '_' for i in range(len(word_choice))}
 
     while wrong_guesses < 5 and not won:
-        print(guess_arr)
-        if '_' not in guess_arr:
-            won = True
-
-        guess = input('Enter a letter: ').lower()
+        print(guess_dict.values())
+        
         guess_string = ""
 
-        for i in guess_arr:
+        for i in guess_dict.values():
             guess_string += i
 
-        if guess in letters_guessed:
+        if guess_string == word_choice:
+            won = True
+            break
+
+        guess = input('Enter a letter: ').lower()
+        if len(guess) != 1 or guess not in ascii_lowercase:
+            print('Invalid guess. Enter a single letter.')
+
+        elif guess in letters_guessed:
             print(f"You've already guessed {guess}. Try again.")
 
         elif guess not in word_choice:
@@ -39,7 +45,7 @@ def main():
             print(f'Wrong. You have {5 - wrong_guesses} guesses remaining.\n')
             letters_guessed.append(guess)
             print(f'These are your guesses: {letters_guessed}\n')
-            print(f"Here's how many are correct: {guess_arr}\n")
+            print(f"Here's how many are correct: {guess_dict.values()}\n")
 
         else:
             print('Correct!\n')
@@ -48,47 +54,15 @@ def main():
                 if letter == guess:
                     indexes.append(index)
 
-            for index, value in enumerate(guess_arr):
-                pass
-
-        
-
+            for i in indexes:
+                guess_dict[i] = guess
 
     if wrong_guesses == 5:
         clear()
         print("You've been hanged. F")
-
-
-
-# string = 'elephant'
-# letter = 'e'
-# indices = []
-
-# for index, value in enumerate(string):
-#     if value == letter:
-#         indices.append(index)
-
-word = 'elephant'
-guess_dict = {i: '_' for i in range(len(word))}
-
-letter = 'e'
-indexes = []
-
-for index, value in enumerate(word):
-    if value == letter:
-        indexes.append(index)
-
-for i in indexes:
-    guess_dict[i] = letter
-
-print(guess_dict)
-
-guess_string = ""
-
-for i in guess_dict.values():
-    if i == '_':
-        continue
     else:
-        guess_string += i
+        print(f"You won! the word was: {word_choice.title()}")
 
-print(guess_string)
+main()
+
+
