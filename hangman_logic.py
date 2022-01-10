@@ -11,7 +11,7 @@ with open("words.txt", 'r') as f:
 # Clear console function
 clear = lambda: os.system('cls')
 
-def main():
+def Game():
    
     difficulty_options = {'Easy': 4, 'Medium': 8, 'Hard': 9}
 
@@ -79,8 +79,9 @@ def main():
         else:
             clear()
             print('Correct!\n')
-            print(letters_guessed)
+            print(f"You have {5 - wrong_guesses} remaining.\n")
             letters_guessed.append(guess)
+            print(letters_guessed)
             indexes = []
             for index, letter in enumerate(word_choice):
                 if letter == guess:
@@ -96,7 +97,8 @@ def main():
         clear()
         print(f"You won! the word was: {word_choice.title()}")
 
-main()
+if __name__ == "__main__":
+    Game()
 
 
 
