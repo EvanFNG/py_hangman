@@ -62,7 +62,7 @@ def Game():
         if len(guess) != 1 or guess not in ascii_lowercase:
             clear()
             print('Invalid guess. Enter a single letter.\n')
-            print(guess_dict.values())
+            print(letters_guessed)
 
         elif guess in letters_guessed:
             clear()
@@ -92,7 +92,7 @@ def Game():
 
     if wrong_guesses == 5:
         clear()
-        print(f"You've been hanged. F. The word was: {word_choice}")
+        print(f"You've been hanged. F. The word was: {word_choice.title()}")
     else:
         clear()
         print(f"You won! the word was: {word_choice.title()}")
