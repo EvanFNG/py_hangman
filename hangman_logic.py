@@ -3,8 +3,6 @@ import random
 import os
 from string import ascii_lowercase
 
-os.chdir("C:/Users/Evan/Documents")
-
 with open("words.txt", 'r') as f:
     words = f.read().splitlines()
 
